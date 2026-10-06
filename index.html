@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KonserKita - Beli Tiket Konser Resmi & Festival Musik Indonesia</title>
+  <meta name="description" content="Platform pembelian tiket konser musik Indonesia yang sederhana, mudah dipahami, transparan, dan terpercaya. Tersedia konser Sheila on 7, Tulus, Dewa 19, Hindia, dan lainnya.">
+  
+  <!-- Google Fonts: Plus Jakarta Sans (Elegan, Ramah, Jernih Dibaca) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet Utama -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ========================================================================
+       1. Top Ad / Pengumuman Sponsor & Promo Bar
+       ======================================================================== -->
+  <div class="ad-top-bar" id="adTopBar">
+    <div class="ad-top-bar-content">
+      <span class="ad-badge-sm">Iklan & Promo</span>
+      <span>Gunakan kode promo <span class="ad-promo-code">HARMONI10</span> untuk potongan diskon 10% semua konser!</span>
+      <button class="ad-btn-copy btn-copy-promo" data-code="HARMONI10" title="Salin Kode Promo">
+        Salin Kode
+      </button>
+    </div>
+    <button class="ad-close-btn" id="closeAdTopBar" title="Tutup Iklan">✕</button>
+  </div>
+
+  <!-- ========================================================================
+       2. Site Header & Navigasi
+       ======================================================================== -->
+  <header class="site-header">
+    <div class="navbar-container">
+      <a href="#katalog" class="brand-logo" aria-label="KonserKita Beranda">
+        <div class="brand-icon">🎟️</div>
+        <span>KonserKita</span>
+      </a>
+
+      <nav aria-label="Menu Utama">
+        <ul class="nav-links">
+          <li><a href="#katalog" class="nav-link active">Jelajah Konser</a></li>
+          <li><a href="#sponsorAd" class="nav-link">Promo & Sponsor</a></li>
+          <li><a href="#panduan" class="nav-link">Cara Beli</a></li>
+          <li><a href="#bantuan" class="nav-link">Bantuan</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn-my-tickets" id="btnMyTickets" aria-label="Lihat Tiket Saya">
+          <span>🎫 Tiket Saya</span>
+          <span class="ticket-count-badge" id="myTicketsCountBadge" style="display: none;">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================
+       3. Hero Banner (Spotlight Konser Utama)
+       ======================================================================== -->
+  <section class="hero-section" aria-label="Sorotan Konser Utama">
+    <div class="hero-banner-card">
+      <img src="assets/images/hero_banner.jpg" alt="Panggung Konser Harmony Festival 2026" class="hero-banner-bg">
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <span class="hero-tag">🌟 Konser Paling Dinanti Tahun 2026</span>
+        <h1 class="hero-title">Harmony Live Festival 2026</h1>
+        <p class="hero-subtitle">
+          Nikmati malam penuh nostalgia bersama Sheila On 7, Tulus, Raisa, Maliq & D'Essentials di Stadion Madya GBK Jakarta. Beli tiket resmi dengan aman dan mudah.
+        </p>
+        <button class="hero-btn" onclick="openOrderModal('konser-harmony-2026')">
+          <span>Beli Tiket Sekarang</span>
+          <span>➔</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. Banner Iklan Partner Resmi (Ad Section)
+       ======================================================================== -->
+  <section class="ad-section-container" id="sponsorAd" aria-label="Iklan Sponsor Resmi">
+    <div class="ad-card-banner">
+      <img src="assets/images/ad_banner.jpg" alt="Aether Audio Official Partner" class="ad-card-img">
+      <div class="ad-card-details">
+        <div class="ad-card-meta">
+          <span class="ad-sponsor-label">Iklan Mitra Resmi</span>
+          <span style="font-size: 0.8rem; color: var(--text-muted);">Aether Audio Indonesia</span>
+        </div>
+        <h2 class="ad-card-title">Aether Audio — Nikmati Musik dengan Suara Jernih</h2>
+        <p class="ad-card-desc">
+          Official Sound Partner konser musim ini. Beli tiket konser apa saja hari ini dan gunakan kode kupon <strong>HARMONI10</strong> untuk diskon tiket + voucher produk headphone Aether!
+        </p>
+      </div>
+      <div class="ad-card-action">
+        <button class="btn-ad-claim btn-copy-promo" data-code="HARMONI10">
+          Klaim Voucher Diskon
+        </button>
+        <span style="font-size: 0.72rem; color: var(--text-muted);">*S&K berlaku</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. Section Pemilihan Konser (Pencarian & Katalog)
+       ======================================================================== -->
+  <main class="main-content" id="katalog">
+    <div class="section-header">
+      <h2 class="section-title">
+        <span>🎶</span>
+        <span>Pilihan Konser & Festival Musik</span>
+      </h2>
+      <p class="section-subtitle">
+        Pilih konser yang ingin Anda tonton, tentukan kategori tempat duduk, dan atur jumlah pembelian tiket dengan mudah.
+      </p>
+    </div>
+
+    <!-- Filter & Pencarian Bar -->
+    <div class="filter-bar" role="search" aria-label="Filter dan Cari Konser">
+      <!-- Search Input -->
+      <div class="search-input-wrapper">
+        <span class="search-icon">🔍</span>
+        <input 
+          type="text" 
+          id="searchInput" 
+          class="search-input" 
+          placeholder="Ketik nama musisi, konser, nama kota, atau tempat acara..." 
+          aria-label="Cari konser"
+        >
+      </div>
+
+      <!-- Controls: Genre Chips & Dropdowns -->
+      <div class="filter-controls-row">
+        <!-- Genre Filter Chips -->
+        <div class="genre-filter-chips" role="tablist" aria-label="Filter Genre">
+          <button class="filter-chip active" data-genre="all">Semua Musik</button>
+          <button class="filter-chip" data-genre="pop">Pop & All-Stars</button>
+          <button class="filter-chip" data-genre="indie">Indie & Folk</button>
+          <button class="filter-chip" data-genre="rock">Rock & Band</button>
+          <button class="filter-chip" data-genre="jazz">Jazz & Soul</button>
+          <button class="filter-chip" data-genre="electronic">Electronic/DJ</button>
+        </div>
+
+        <!-- Kota & Urutan Dropdowns -->
+        <div class="filter-dropdowns">
+          <select id="cityFilter" class="filter-select" aria-label="Filter berdasarkan Kota">
+            <option value="all">📍 Semua Kota</option>
+            <option value="Jakarta">Jakarta</option>
+            <option value="Bandung">Bandung</option>
+            <option value="Surabaya">Surabaya</option>
+            <option value="Yogyakarta">Yogyakarta</option>
+            <option value="Bali">Bali</option>
+          </select>
+
+          <select id="sortFilter" class="filter-select" aria-label="Urutkan berdasarkan">
+            <option value="recommended">✨ Paling Populer</option>
+            <option value="price-asc">Harga: Terendah</option>
+            <option value="price-desc">Harga: Tertinggi</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid Kartu Konser -->
+    <div class="concert-grid" id="concertGrid" aria-live="polite">
+      <!-- Diisi secara dinamis oleh JavaScript -->
+    </div>
+  </main>
+
+  <!-- ========================================================================
+       6. Section Panduan Pemesanan Sederhana
+       ======================================================================== -->
+  <section class="main-content" id="panduan" style="margin-top: 0;" aria-label="Panduan Pemesanan">
+    <div style="background-color: var(--bg-card); border: 1px solid var(--border-light); border-radius: var(--radius-lg); padding: 28px 24px; box-shadow: var(--shadow-sm);">
+      <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--text-main); margin-bottom: 6px;">
+        💡 Alur Pembelian Tiket yang Sangat Sederhana
+      </h3>
+      <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 24px;">
+        Hanya butuh 3 menit tanpa langkah berbelit-belit untuk mendapatkan e-tiket resmi Anda:
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+        <div style="display: flex; gap: 14px;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background-color: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">1</div>
+          <div>
+            <div style="font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Pilih Konser & Kategori</div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">Pilih konser favorit Anda, tentukan kategori tribun/festival, dan sesuaikan jumlah tiket yang ingin dibeli.</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background-color: var(--primary-light); color: var(--primary); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">2</div>
+          <div>
+            <div style="font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Lengkapi Data & Bayar</div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">Masukkan nama sesuai KTP dan email. Bayar cepat via QRIS, Virtual Account bank, atau E-Wallet pilihan Anda.</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background-color: var(--success-light); color: var(--success); display: flex; align-items: center; justify-content: center; font-weight: 800; flex-shrink: 0;">3</div>
+          <div>
+            <div style="font-weight: 700; color: var(--text-main); margin-bottom: 4px;">Terima E-Tiket Resmi</div>
+            <div style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5;">E-Tiket dengan barcode resmi langsung terbit di layar, bisa dicetak atau diunduh untuk scan di pintu masuk venue.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. Modal Alur Pemesanan Lengkap (Order Modal)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="orderModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-window">
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-step-badge" id="modalStepBadge">Langkah 1 dari 3</span>
+          <h3 class="modal-title" id="modalTitle">Pilih Kategori & Jumlah Tiket</h3>
+        </div>
+        <button class="modal-close-btn" id="modalCloseBtn" aria-label="Tutup Jendela Pemesanan">✕</button>
+      </div>
+
+      <!-- Step Indicator Bar -->
+      <div style="padding: 12px 24px 0; background-color: #fafbfc; border-bottom: 1px solid var(--border-light);">
+        <div class="steps-indicator">
+          <div class="step-item active" id="stepIndicator1">
+            <span class="step-num">1</span>
+            <span>Tiket & Jumlah</span>
+          </div>
+          <div class="step-item" id="stepIndicator2">
+            <span class="step-num">2</span>
+            <span>Data Pemesan</span>
+          </div>
+          <div class="step-item" id="stepIndicator3">
+            <span class="step-num">3</span>
+            <span>Pembayaran</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Body (Berubah sesuai langkah aktif) -->
+      <div class="modal-body" id="modalDynamicContent">
+        <!-- Render dinamis via app.js -->
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="modal-footer" id="modalFooter">
+        <!-- Render dinamis via app.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       8. Modal "Cek Tiket Saya" (Riwayat E-Tiket)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="myTicketsModal" role="dialog" aria-modal="true" aria-labelledby="myTicketsModalTitle">
+    <div class="modal-window" style="max-width: 640px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <span class="modal-step-badge">Penyimpanan Tiket</span>
+          <h3 class="modal-title" id="myTicketsModalTitle">Daftar E-Tiket Saya</h3>
+        </div>
+        <button class="modal-close-btn" id="closeMyTicketsModal" aria-label="Tutup Daftar Tiket">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px;">
+          Semua tiket yang berhasil Anda beli tersimpan rapi di perangkat ini. Klik tombol <strong>"Lihat Tiket"</strong> untuk menampilkan barcode dan mencetak e-tiket Anda kapan saja.
+        </p>
+        <div class="my-tickets-list" id="myTicketsList">
+          <!-- Render daftar tiket -->
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn-close-modal" onclick="closeMyTicketsModal()">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       9. Footer
+       ======================================================================== -->
+  <footer class="site-footer" id="bantuan">
+    <div class="footer-container">
+      <div>
+        <div class="footer-brand-title">
+          <span>🎟️</span>
+          <span>KonserKita</span>
+        </div>
+        <p class="footer-desc">
+          Layanan pemesanan tiket konser musik dan festival resmi di Indonesia. Mengutamakan transparansi harga, kepastian barcode resmi, dan kenyamanan penikmat musik tanah air.
+        </p>
+        <div style="margin-top: 14px; font-size: 0.85rem; color: #cbd5e1;">
+          📧 Bantuan: <strong>bantuan@konserkita.id</strong> • 📱 WhatsApp: <strong>0812-9988-7766</strong>
+        </div>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Tautan Cepat</div>
+        <ul class="footer-links">
+          <li><a href="#katalog" class="footer-link">Semua Jadwal Konser</a></li>
+          <li><a href="#sponsorAd" class="footer-link">Promo & Voucher Sponsor</a></li>
+          <li><a href="#panduan" class="footer-link">Syarat & Ketentuan Masuk</a></li>
+          <li><a href="javascript:void(0)" onclick="openMyTicketsModal()" class="footer-link">Cek Status E-Tiket</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div class="footer-col-title">Metode Pembayaran Resmi</div>
+        <p style="font-size: 0.82rem; color: #94a3b8; line-height: 1.6;">
+          Mendukung QRIS nasional, BCA Virtual Account, Mandiri, BNI, BRI, GoPay, ShopeePay, dan Kartu Kredit dengan enkripsi aman 256-bit.
+        </p>
+        <div style="margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap;">
+          <span style="background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; color: white;">QRIS</span>
+          <span style="background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; color: white;">BCA</span>
+          <span style="background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; color: white;">Mandiri</span>
+          <span style="background: rgba(255,255,255,0.1); padding: 3px 8px; border-radius: 4px; font-size: 0.75rem; color: white;">GoPay</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 KonserKita Indonesia. Hak Cipta Dilindungi Undang-Undang.</div>
+      <div style="color: #64748b;">Platform Tiket Konser Sederhana & Ramah Pengguna</div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
